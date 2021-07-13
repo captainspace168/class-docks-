@@ -39,9 +39,10 @@ Here are a few examples of using functions that are included in R
 
 ```{r}
 # Call the print() function, passing it "Hello world" as an argument
+print("hello world ")
 
 # Call the sqrt() function, passing it 25 as an argument
-
+sqrt(25)
 ```
 
 If you call any of these functions interactively, R will display the returned value (the output) in the console. However, the computer is not able to “read” what is written in the console. If you want the computer to be able to use a returned value, you will need to give that value a name. 
