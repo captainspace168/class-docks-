@@ -49,13 +49,13 @@ If you call any of these functions interactively, R will display the returned va
 
 ```{r}
 # Store the minimum value of a vector in the variable `smallest_number`
-
+smallest_number<-min(1,6/8,4/3)
 
 # You can then use the variable as usual, such as for a comparison
-
+smallest_number> 1 
 
 # You can also use functions inline with other operations
-
+phi <-.5+sqrt(5)/2
 ```
 
 ## Built-in R Functions
@@ -75,14 +75,16 @@ As a result, you don’t need to remember the order of optional arguments but ca
 
 ```{r}
 # Use the `sep` named argument to specify the separator is '+++'
-
+paste("Hi","father ",sep="+++")
 ```
 
 **Named arguments are almost always optional** (since they have default values) and can be included in any order. Indeed, many functions allow you to specify arguments either as positional arguments (called such because they are determined by their position in the argument list) or with a name. For example, the second positional argument to the round() function can also be specified as the named argument digits:
 
 ```{r}
 # These function calls are all equivalent, though the 2nd is most clear/common
-
+round(3.1415,3)
+round(3.1415,digits = 3)
+round(digits = 3, 3.1415)
 ```
 
 To see a list of arguments—required or optional, positional or named—available to a function, look it up in the documentation (e.g., using `?FUNCTION_NAME`). For example, if you look up the `paste()` function (using `?paste` in RStudio), you will see the documentation shown in the figure 
