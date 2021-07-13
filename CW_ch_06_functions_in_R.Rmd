@@ -1,0 +1,215 @@
+---
+title: "Functions and Conditionals"
+output: html_notebook
+---
+## Introduction
+
+As you begin to take on data science projects, you will find that the tasks you perform will involve multiple different instructions (lines of code). Moreover, you will often want to be able to repeat these tasks (both within and across projects). 
+
+For example, there are many steps involved in computing summary statistics for some data, and you may want to repeat this analysis for different variables in a data set or perform the same type of analysis across two different data sets. 
+
+Planning out and writing your code will be notably easier if can you group together the lines of code associated with each overarching task into a single step.
+
+**Functions** represent a way for you to add a label to a **group of instructions**. Thinking about the tasks you need to perform provides a useful abstraction in the way you think about your programming. 
+
+It will help you hide the details and **generalize your work**. Instead of thinking about the many lines of code involved in each task, you can think about the task itself (e.g., `compute_summary_stats()`).
+
+## What is a Function?
+
+In a broad sense, a **function** is a named **sequence of instructions** (lines of code) that you may want to perform one or more times throughout a program. 
+Functions provide a way of encapsulating multiple instructions into a single “unit” that can be used in a variety of contexts. 
+
+So, rather than needing to repeatedly write down all the individual instructions for drawing a chart for every one of your variables, you can define a `make_chart()` function once and then just call (execute) that function when you want to perform those steps.
+
+Specifying an argument (input/parameter) for a function is called *passing the argument* into the function.
+
+Grouping instructions into reusable functions is helpful throughout the data science process, including areas such as the following:
+
+- **Data management**: You can group instructions for loading and organizing data so they can be applied to multiple data sets.
+
+- **Data analysis**: You can store the steps for calculating a metric of interest so that you can repeat your analysis for multiple variables.
+
+- **Data visualization**: You can define a process for creating graphics with a particular structure and style so that you can generate consistent reports.
+
+## Function Syntax
+
+R functions are referred to by name. As in many programming languages, you call a function by writing the name of the function followed immediately (no space) by parentheses (). Inside the parentheses, you put the arguments (inputs) to the function separated by commas. Thus, computer functions look just like multi-variable mathematical functions, but with names longer than `f()`. 
+
+Here are a few examples of using functions that are included in R
+
+```{r}
+# Call the print() function, passing it "Hello world" as an argument
+
+# Call the sqrt() function, passing it 25 as an argument
+
+```
+
+If you call any of these functions interactively, R will display the returned value (the output) in the console. However, the computer is not able to “read” what is written in the console. If you want the computer to be able to use a returned value, you will need to give that value a name. 
+
+```{r}
+# Store the minimum value of a vector in the variable `smallest_number`
+
+
+# You can then use the variable as usual, such as for a comparison
+
+
+# You can also use functions inline with other operations
+
+```
+
+## Built-in R Functions
+
+As you have likely noticed, R comes with a variety of functions that are built into the language (also referred to as “base” R functions). 
+
+The preceding example used the `print()` function to print a value to the console, the `min()` function to find the smallest number among the arguments, and the `sqrt()` function to take the square root of a number.
+
+
+
+## Named Arguments
+
+Many functions have both **required arguments** (values that you must provide) and **optional arguments** (arguments that have a “default” value, unless you specify otherwise). Optional arguments are usually specified using named arguments, in which you specify that an argument value has a particular name. 
+As a result, you don’t need to remember the order of optional arguments but can instead simply reference them by name.
+
+*Named arguments* are written by putting the name of the argument (which is like a variable name), followed by the equals symbol (`=`), followed by the value to pass to that argument. 
+
+```{r}
+# Use the `sep` named argument to specify the separator is '+++'
+
+```
+
+**Named arguments are almost always optional** (since they have default values) and can be included in any order. Indeed, many functions allow you to specify arguments either as positional arguments (called such because they are determined by their position in the argument list) or with a name. For example, the second positional argument to the round() function can also be specified as the named argument digits:
+
+```{r}
+# These function calls are all equivalent, though the 2nd is most clear/common
+
+```
+
+To see a list of arguments—required or optional, positional or named—available to a function, look it up in the documentation (e.g., using `?FUNCTION_NAME`). For example, if you look up the `paste()` function (using `?paste` in RStudio), you will see the documentation shown in the figure 
+
+
+
+## Loading Functions
+
+Although R comes with lots of **built-in functions**, you can always use more functions! **Packages** are additional sets of R functions that are written and published by the R community. 
+
+Because many R users encounter the same data management and analysis challenges, programmers are able to use these packages and thereby benefit from the work of others. 
+
+Popular R packages exist for manipulating data (`dplyr`), making beautiful graphics (`ggplot2`), and implementing machine learning algorithms (`caret`).
+
+R packages need to be downloaded (once) and then loaded into your interpreter’s environment (each time you wish to use them). 
+
+The base R software provides the `install.packages()` function for installing packages, and the `library()` function for loading them. 
+
+```{r}
+# Install the `stringr` package. Only needs to be done once per computer
+
+# Load the package
+
+```
+
+The `install.packages()` function downloads the necessary set of R code for a given package (which explains why you need to do it only once per machine), while the `library()` function loads those scripts into your current R session.
+
+After loading a package with the `library()` function, you have access to functions that were written as part of that package. For example, `stringr` provides a function `str_count()` that returns how many times a  “substring” appears in a word 
+
+```{r}
+# How many i's are in Mississippi?
+
+```
+
+Because there are so many packages, many of them will provide functions with the same names. You thus might need to distinguish between the `str_count()` function from stringr and the `str_count()` function from somewhere else. You can do this by using the full package name of the function (called namespacing the function)—written as the package name, followed by a double colon (`::`), followed by the name of the function:
+
+```{r}
+# Explicitly call the namespaced `str_count` function. 
+ 
+
+# Equivalently, call the function without namespacing
+ 
+```
+
+## Writing Functions
+
+Anytime that you have a task that you may repeat throughout a script—or if you just want to organize your thinking—it’s good practice to write a function to perform that task. This will limit repetition and reduce the likelihood of errors, as well as make things easier to read and understand.
+
+```{r}
+# A function named `make_full_name` that takes two arguments
+# and returns the "full name" made from them
+
+
+# Call the `make_full_name()` function with the values "Alice" and "Kim"
+
+```
+
+Functions are in many ways like variables: they have a name to which you assign a value (using the same assignment operator: `<-`). 
+
+One difference is that they are written using the function keyword to indicate that you are creating a function and not simply storing a value. A function’s name should clearly suggest what it does.
+
+**Arguments**: The value assigned to the function name uses the syntax `function(...)` to indicate that you are creating a function (as opposed to a number or character string). 
+
+The words put between the parentheses are names for variables that will contain the values passed in as arguments. For example, when you call `make_full_name("Alice", "Kim")`, the value of the first argument (`"Alice"`) will be assigned to the first variable (`first_name`), and the value of the second argument (`"Kim"`) will be assigned to the second variable (`last_name`).
+
+**Body**: The body of the function is a block of code that falls between curly braces `{}`. The cleanest style is to put the opening `{` immediately after the arguments list, and the closing `}` on its own line. The function body specifies all the instructions that your function will perform. 
+
+**Return value**: A function will return (output) whatever value is evaluated in the last statement (line) of that function. In the preceding example, the final full_name statement will be returned.
+It is also possible to explicitly state what value to return by using the `return()` function, passing it the value that you wish your function to return:
+
+```{r}
+# A function to calculate the area of a rectangle
+
+```
+
+## Using Conditional Statement
+
+**Functions** are a way to organize and control the flow of execution of your code (e.g., which lines of code get run in which order). In R, as in other languages, you can also control program flow by specifying different instructions that can be run based on a different set of conditions. Conditional statements allow you to specify different blocks of code to run when given different contexts, which is often valuable within functions.
+
+In an abstract sense, a conditional statement is saying:
+
+IF something is true
+  do some lines of code
+OTHERWISE
+  do some other lines of code
+
+In R, you write these conditional statements using the keywords if and else and the following syntax:
+
+```
+# A generic conditional statement
+if (condition){
+# lines of code to run if `condition` is TRUE
+} else {
+# lines of code to run if `condition` is FALSE
+}
+```
+
+Note that the else needs to be on the same line as the closing curly brace (}) of the if block. 
+It is also possible to omit the else and its block, in case you don’t want to do anything when the condition isn’t met.
+
+The condition can be any variable or expression that resolves to a logical value (TRUE or FALSE). Thus both of the following conditional statements are valid:
+
+```{r}
+# Evaluate conditional statements based on the temperature of porridge
+# Set an initial temperature value for the porridge
+
+# If the porridge temperature exceeds a given threshold, enter the code block
+
+```
+
+```{r}
+# Alternatively, you can store a condition (as a TRUE/FALSE value)
+# in a variable
+
+# If the condition `too_cold` is TRUE, enter the code block
+
+```
+
+You can further extend the set of conditions evaluated using an else if statement. For example:
+
+```{r}
+# Function to determine if you should eat porridge
+
+```
+
+Note that a set of conditional statements causes the code to branch—that is, only one block of the code will be executed. As such, you may want to have one block return a specific value from a function, while the other block might keep going (or return something else). This is when you would want to use the `return()` function:
+
+```{r}
+
+```
+
